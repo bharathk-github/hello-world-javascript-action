@@ -84,13 +84,13 @@ function triggerAPI() {
       .then(result => {
         console.log('API response:', result);
   
-        if (result.status === 'CLOSED') {
-          console.log('Status is CLOSED. Breaking the loop.');
+        if (result.result === 'SUCCEEDED') {
+          console.log('Status is SUCCEEDED. Breaking the loop.');
           clearInterval(intervalId);  
-        } else if (result.status === 'FAULTED' || result.status === 'FAULTING') {
+        } else if (result.result === 'FAULTED' || result.result_v2 === 'FAULTED') {
           console.error('Status is FAULTED or FAULTING. Breaking the loop and exiting with an error.');
-          clearInterval(intervalId);  
-          process.exit(1);  
+          clearInterval(intervalId);
+          throw new Error('Deployment failed in UCD')
         }
       })
       .catch(error => {
