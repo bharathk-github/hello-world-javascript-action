@@ -1,13 +1,15 @@
+// create a constant variable that accepts a map from process input
+
 const application = process.env.INPUT_APPLICATION;
 const applicationProcess = process.env.INPUT_APPLICATIONPROCESS;
 const environment = process.env.INPUT_ENVIRONMENT;
 const onlyChanged = process.env.INPUT_ONLYCHANGED === 'true';
-const versions = process.env.INPUT_VERSIONS.split(',');
+const disableSSLVerification = process.env.INPUT_DISABLESSLVERIFICATION === 'true';
+const versions = JSON.parse(process.env.INPUT_MYCOMPLEXDATA);
 const hostname = process.env.INPUT_HOSTNAME;
 const port = process.env.INPUT_PORT;
 const username = process.env.INPUT_USERNAME;
 const password = process.env.INPUT_PASSWORD;
-const component = process.env.INPUT_COMPONENT;
 let requestId='';
 let intervalId; 
 const https = require('https'); 
@@ -22,17 +24,18 @@ import('node-fetch')
     "applicationProcess": applicationProcess,
     "environment": environment,
     "onlyChanged": onlyChanged,
-    "versions": versions.map(version => ({
-      "version": version,
-      "component": component
+    "versions": versions.forEach(item => ({
+      "component": item.component,
+      "version": item.version
     }))
   };
 
 
   const authHeader = 'Basic ' + Buffer.from(username + ':' + password).toString('base64');
 
+
   const httpsAgent = new https.Agent({
-    rejectUnauthorized: false // Ignore SSL verification
+    rejectUnauthorized:  disableSSLVerification === 'true'  
   });
 
   fetch(apiUrl, {
@@ -69,9 +72,13 @@ function triggerAPI() {
     const fetch = module.default;     
     const authHeader = 'Basic ' + Buffer.from(username + ':' + password).toString('base64');
     const apiUrl = 'https://'+hostname+':'+port+'/cli/applicationProcessRequest/requestStatus?request='+requestId
-    const httpsAgent = new https.Agent({ rejectUnauthorized: false });
+    const httpsAgent = new https.Agent({
+      rejectUnauthorized:  disableSSLVerification === 'true'  
+    });
 
-    process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
+    if (disableSSLVerification === 'true') {
+      process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
+    }
 
     fetch(apiUrl, {
       method: 'GET',

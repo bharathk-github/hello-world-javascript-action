@@ -18,10 +18,7 @@ inputs:
   versions:
     description: '1 ore more Versions'
     required: true
-    type: array
-  component:
-    description: 'component name'
-    required: 'true'
+    type: String
   hostname:
     description: 'UCD hostname'
     required: true
@@ -36,6 +33,11 @@ inputs:
     description: 'password'
     required: true
     secret: true
+  disableSSLVerification:
+    description: 'skip SSL certificate validation when making HTTPS requests and this is discouraged'
+    required: true
+    type: boolean
+    default: false
 outputs:
   time: # id of output
     description: 'The time we greeted you'
