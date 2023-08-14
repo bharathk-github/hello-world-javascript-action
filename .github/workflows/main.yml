@@ -8,13 +8,12 @@ jobs:
     steps:
       - name: Deploy UCD application
         id: Deploy_MYAPP
-        uses: kblogin123456/hello-world-javascript-action@v1.16
+        uses: kblogin123456/hello-world-javascript-action@v1.17
         with:
           application: 'MYAPP'
-          applicationProcess: 'DEPLOY-HFS'
+          applicationProcess: 'Install'
           environment: 'DEV'
-          versions: 'hfs_only_rabo_uid'
-          component: 'MYCOMP'
+          versions: '{"version": "TEMP1-JCLA", "component": "MYCOMP"},{"version": "File1","component": "Regular component"}'
           hostname: '10.134.119.177'
           username: 'admin'
           password: '${{ secrets.UCD_PASSWORD }}'
