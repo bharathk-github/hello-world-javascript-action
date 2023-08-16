@@ -1,18 +1,22 @@
 // create a constant variable that accepts a map from process input
-
+console.log("Version from input is ")
+console.log(process.env.INPUT_VERSIONS)
+console.log("=========== starting process now =============")
 const application = process.env.INPUT_APPLICATION;
 const applicationProcess = process.env.INPUT_APPLICATIONPROCESS;
 const environment = process.env.INPUT_ENVIRONMENT;
-const onlyChanged = process.env.INPUT_ONLYCHANGED === 'true';
-const disableSSLVerification = process.env.INPUT_DISABLESSLVERIFICATION === 'true';
 const versions = JSON.parse(process.env.INPUT_VERSIONS);
 const hostname = process.env.INPUT_HOSTNAME;
-const port = process.env.INPUT_PORT;
 const username = process.env.INPUT_USERNAME;
 const password = process.env.INPUT_PASSWORD;
+const onlyChanged = process.env.INPUT_ONLYCHANGED === 'true';
+const disableSSLVerification = process.env.INPUT_DISABLESSLVERIFICATION === 'true';
+const port = process.env.INPUT_PORT;
 let requestId='';
 let intervalId; 
 const https = require('https'); 
+
+
 
 import('node-fetch')
 .then((module) => {
