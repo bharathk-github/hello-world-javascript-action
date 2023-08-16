@@ -258,20 +258,24 @@ var __webpack_exports__ = {};
 // This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
 (() => {
 // create a constant variable that accepts a map from process input
-
+console.log("Version from input is ")
+console.log(process.env.INPUT_VERSIONS)
+console.log("=========== starting process now =============")
 const application = process.env.INPUT_APPLICATION;
 const applicationProcess = process.env.INPUT_APPLICATIONPROCESS;
 const environment = process.env.INPUT_ENVIRONMENT;
-const onlyChanged = process.env.INPUT_ONLYCHANGED === 'true';
-const disableSSLVerification = process.env.INPUT_DISABLESSLVERIFICATION === 'true';
-const versions = JSON.parse(process.env.INPUT_MYCOMPLEXDATA);
+const versions = JSON.parse(process.env.INPUT_VERSIONS);
 const hostname = process.env.INPUT_HOSTNAME;
-const port = process.env.INPUT_PORT;
 const username = process.env.INPUT_USERNAME;
 const password = process.env.INPUT_PASSWORD;
+const onlyChanged = process.env.INPUT_ONLYCHANGED === 'true';
+const disableSSLVerification = process.env.INPUT_DISABLESSLVERIFICATION === 'true';
+const port = process.env.INPUT_PORT;
 let requestId='';
 let intervalId; 
 const https = __nccwpck_require__(687); 
+
+
 
 __nccwpck_require__.e(/* import() */ 960).then(__nccwpck_require__.bind(__nccwpck_require__, 960))
 .then((module) => {
