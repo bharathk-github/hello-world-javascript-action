@@ -11,7 +11,7 @@ jobs:
     steps:
       - name: Deploy UCD application
         id: Deploy_MYAPP
-        uses: kblogin123456/hello-world-javascript-action@debug
+        uses: kblogin123456/hello-world-javascript-action@v1.19
         with:
           application: 'MYAPP'
           applicationProcess: 'Install'
@@ -20,6 +20,4 @@ jobs:
           hostname: '10.134.119.177'
           username: 'admin'
           password: '${{ secrets.UCD_PASSWORD }}'
-      # Use the output from the `hello` step
-      - name: Get the output time
-        run: echo "The time was ${{ steps.hello.outputs.time }}"
+
