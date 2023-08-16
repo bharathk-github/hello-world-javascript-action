@@ -264,7 +264,9 @@ console.log("=========== starting process now =============")
 const application = process.env.INPUT_APPLICATION;
 const applicationProcess = process.env.INPUT_APPLICATIONPROCESS;
 const environment = process.env.INPUT_ENVIRONMENT;
-const versions = JSON.parse(process.env.INPUT_VERSIONS);
+// const versions = JSON.parse(process.env.INPUT_VERSIONS);
+const versions = process.env.INPUT_VERSIONS;
+console.log(versions)
 const hostname = process.env.INPUT_HOSTNAME;
 const username = process.env.INPUT_USERNAME;
 const password = process.env.INPUT_PASSWORD;
