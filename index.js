@@ -1,12 +1,13 @@
-// create a constant variable that accepts a map from process input
-console.log("Version from input is ")
-console.log(process.env.INPUT_VERSIONS)
-console.log("=========== starting process now =============")
 const application = process.env.INPUT_APPLICATION;
 const applicationProcess = process.env.INPUT_APPLICATIONPROCESS;
 const environment = process.env.INPUT_ENVIRONMENT;
-// const versions = JSON.parse(process.env.INPUT_VERSIONS);
-const versions = process.env.INPUT_VERSIONS;
+var versions; 
+try{
+  versions = JSON.parse(process.env.INPUT_VERSIONS);
+} catch(error){
+  console.error('Error parsing input versions json ',error)
+  throw new Error("Error parsing input versions")
+}
 console.log(versions)
 const hostname = process.env.INPUT_HOSTNAME;
 const username = process.env.INPUT_USERNAME;
