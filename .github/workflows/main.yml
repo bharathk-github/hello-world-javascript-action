@@ -3,7 +3,7 @@ on:
 
 jobs:
   hello_world_job:
-    runs-on: javascript-action-runner
+    runs-on: self-hosted
     name: A job to deploy UCD application
     steps:
       - name: Deploy UCD application
