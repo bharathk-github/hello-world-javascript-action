@@ -5,7 +5,7 @@ const applicationProcess = process.env.INPUT_APPLICATIONPROCESS;
 const environment = process.env.INPUT_ENVIRONMENT;
 const onlyChanged = process.env.INPUT_ONLYCHANGED === 'true';
 const disableSSLVerification = process.env.INPUT_DISABLESSLVERIFICATION === 'true';
-const versions = JSON.parse(process.env.INPUT_MYCOMPLEXDATA);
+const versions = JSON.parse(process.env.INPUT_VERSIONS);
 const hostname = process.env.INPUT_HOSTNAME;
 const port = process.env.INPUT_PORT;
 const username = process.env.INPUT_USERNAME;
