@@ -1,5 +1,8 @@
 on:
   workflow_dispatch:
+    inputs:
+      version-input:
+        description: 'Versions to deploy'
 
 jobs:
   hello_world_job:
