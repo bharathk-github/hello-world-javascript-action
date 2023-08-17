@@ -310,10 +310,11 @@ __nccwpck_require__.e(/* import() */ 960).then(__nccwpck_require__.bind(__nccwpc
       "environment": environment,
       "onlyChanged": onlyChanged,
       "properties": properties,
-      "versions": versions.forEach(item => ({
-        "component": item.component,
-        "version": item.version
-      }))
+      // "versions": versions.forEach(item => ({
+      //   "component": item.component,
+      //   "version": item.version
+      // }))
+      "versions": versions
     };
 
     if(properties !== null ) {
