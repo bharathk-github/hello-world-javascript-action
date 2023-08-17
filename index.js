@@ -1,6 +1,7 @@
 const application = process.env.INPUT_APPLICATION;
 const applicationProcess = process.env.INPUT_APPLICATIONPROCESS;
 const environment = process.env.INPUT_ENVIRONMENT;
+
 var versions;
 try {
   versions = JSON.parse(process.env.INPUT_VERSIONS);
@@ -9,9 +10,26 @@ try {
   console.error("----------------------------------------")
   console.error(process.env.INPUT_VERSIONS)
   console.error("----------------------------------------")
-  throw new Error("Error parsing input versions")
+  throw new Error("Acceptable JSON format for versions is {\"version\":\"version1\" , \n  \"component\":\"component1\"}");
 }
 console.log(versions)
+
+const inputProperties = process.env.INPUT_PROPERTIES;
+var properties=null;
+if (inputProperties !== null && inputProperties !== "") {
+  try {
+    properties = JSON.parse(inputProperties);
+  } catch (error) {
+    console.error('Error parsing input properties json ', error)
+    console.error("----------------------------------------")
+    console.error(inputProperties)
+    console.error("----------------------------------------")
+    throw new Error("Acceptable JSON format for properties is {\"prop1\":\"value1\" , \n  \"prop2\":\"value2\" }");
+  }
+  console.log(properties)
+}
+
+
 const hostname = process.env.INPUT_HOSTNAME;
 const username = process.env.INPUT_USERNAME;
 const password = process.env.INPUT_PASSWORD;
@@ -21,8 +39,6 @@ const port = process.env.INPUT_PORT;
 let requestId = '';
 let intervalId;
 const https = require('https');
-
-
 
 import('node-fetch')
   .then((module) => {
@@ -34,11 +50,16 @@ import('node-fetch')
       "applicationProcess": applicationProcess,
       "environment": environment,
       "onlyChanged": onlyChanged,
+      "properties": properties,
       "versions": versions.forEach(item => ({
         "component": item.component,
         "version": item.version
       }))
     };
+
+    if(properties !== null ) {
+      data.properties = properties;
+    }
 
 
     const authHeader = 'Basic ' + Buffer.from(username + ':' + password).toString('base64');
@@ -65,7 +86,7 @@ import('node-fetch')
         intervalId = setInterval(triggerAPI, 5000);
       })
       .catch(error => {
-        console.error('Unable to deploy in UCD', error);
+        console.error('Unable to deploy in UCD : ', error);
         throw new Error("Terminating!! ");
       });
   })

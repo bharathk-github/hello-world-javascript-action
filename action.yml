@@ -15,8 +15,12 @@ inputs:
     required: false
     type: boolean
     default: false
+  properties:
+    description : 'Properties for Application process properties as a JSON String'
+    required: false
+    type: String
   versions:
-    description: '1 ore more Versions'
+    description: 'Version along with component as a JSON string '
     required: true
     type: String
   hostname:
@@ -38,9 +42,6 @@ inputs:
     required: true
     type: boolean
     default: false
-outputs:
-  time: # id of output
-    description: 'The time we greeted you'
 runs:
   using: 'node16'
   main: 'index.js'
