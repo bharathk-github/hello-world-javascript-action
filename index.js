@@ -12,10 +12,9 @@ try {
   console.error("----------------------------------------")
   throw new Error("Acceptable JSON format for versions is {\"version\":\"version1\" , \n  \"component\":\"component1\"}");
 }
-console.log(versions)
 
 const inputProperties = process.env.INPUT_PROPERTIES;
-var properties=null;
+var properties = null;
 if (inputProperties !== null && inputProperties !== "") {
   try {
     properties = JSON.parse(inputProperties);
@@ -26,7 +25,6 @@ if (inputProperties !== null && inputProperties !== "") {
     console.error("----------------------------------------")
     throw new Error("Acceptable JSON format for properties is {\"prop1\":\"value1\" , \n  \"prop2\":\"value2\" }");
   }
-  console.log(properties)
 }
 
 
@@ -51,16 +49,14 @@ import('node-fetch')
       "environment": environment,
       "onlyChanged": onlyChanged,
       "properties": properties,
-      // "versions": versions.forEach(item => ({
-      //   "component": item.component,
-      //   "version": item.version
-      // }))
       "versions": versions
     };
 
-    if(properties !== null ) {
+    if (properties !== null) {
       data.properties = properties;
     }
+
+    console.log("Triggering UCD deployment with " + data);
 
 
     const authHeader = 'Basic ' + Buffer.from(username + ':' + password).toString('base64');
