@@ -15,9 +15,6 @@ jobs:
           environment: 'DEV'
           versions: 'hfs_only_rabo_uid'
           component: 'MYCOMP'
-          hostname: '10.134.119.177'
-          username: 'admin'
+          hostname: '${{ secrets.UCD_HOST }}'
+          username: '${{ secrets.UCD_USERNAME }}'
           password: '${{ secrets.UCD_PASSWORD }}'
-      # Use the output from the `hello` step
-      - name: Get the output time
-        run: echo "The time was ${{ steps.hello.outputs.time }}"
