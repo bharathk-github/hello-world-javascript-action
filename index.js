@@ -51,10 +51,11 @@ import('node-fetch')
       "environment": environment,
       "onlyChanged": onlyChanged,
       "properties": properties,
-      "versions": versions.forEach(item => ({
-        "component": item.component,
-        "version": item.version
-      }))
+      // "versions": versions.forEach(item => ({
+      //   "component": item.component,
+      //   "version": item.version
+      // }))
+      "versions": versions
     };
 
     if(properties !== null ) {

@@ -11,7 +11,7 @@ jobs:
     steps:
       - name: Deploy UCD application
         id: Deploy_MYAPP
-        uses: kblogin123456/hello-world-javascript-action@v1.20
+        uses: kblogin123456/hello-world-javascript-action@v1.20debug
         with:
           application: 'MYAPP'
           applicationProcess: 'Install'
