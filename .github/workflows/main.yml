@@ -3,10 +3,14 @@ on:
     inputs:
       version-input:
         description: 'Versions to deploy'
-
+# on:
+#   push:
+#     branches:
+#       - 'main'
 jobs:
   hello_world_job:
     runs-on: self-hosted
+    environment: DEV
     name: A job to deploy UCD application
     steps:
       - name: Deploy UCD application
