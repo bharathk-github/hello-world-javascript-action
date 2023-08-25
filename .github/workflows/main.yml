@@ -1,8 +1,5 @@
 on:
   workflow_dispatch:
-    inputs:
-      version-input:
-        description: 'Versions to deploy'
 # on:
 #   push:
 #     branches:
