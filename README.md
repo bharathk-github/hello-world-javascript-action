@@ -35,7 +35,7 @@ jobs:
 
     steps:
     - name: Deploy to UCD
-      uses: kblogin123456/hello-world-javascript-action@v1.21
+      uses: kblogin123456/hello-world-javascript-action@v1.22
       with:
         application: 'MyApp'
         applicationProcess: 'DeployProcess'
@@ -65,7 +65,7 @@ jobs:
 
     steps:
     - name: Deploy to UCD
-      uses: kblogin123456/hello-world-javascript-action@v1.21
+      uses: kblogin123456/hello-world-javascript-action@v1.22
       with:
         application: 'MyApp'
         applicationProcess: 'DeployProcess'
