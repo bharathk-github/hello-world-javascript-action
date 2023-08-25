@@ -260,16 +260,26 @@ var __webpack_exports__ = {};
 const application = process.env.INPUT_APPLICATION;
 const applicationProcess = process.env.INPUT_APPLICATIONPROCESS;
 const environment = process.env.INPUT_ENVIRONMENT;
+const snapshot = process.env.INPUT_SNAPSHOT;
+const inputVersions = process.env.INPUT_VERSIONS;
 
 var versions;
-try {
-  versions = JSON.parse(process.env.INPUT_VERSIONS);
-} catch (error) {
-  console.error('Error parsing input versions json ', error)
-  console.error("----------------------------------------")
-  console.error(process.env.INPUT_VERSIONS)
-  console.error("----------------------------------------")
-  throw new Error("Acceptable JSON format for versions is {\"version\":\"version1\" , \n  \"component\":\"component1\"}");
+var useVersion;
+if (snapshot == null || snapshot == "") {
+  try {
+    if(inputVersions == null || inputVersions == ""){
+      console.error('No snapshot (or) Version provided in the input to be deployed ');
+      throw new Error("Missing version (or) snapshot in the input");
+    }
+    versions = JSON.parse(inputVersions);
+    useVersion = true;
+  } catch (error) {
+    console.error('Error parsing input versions json ', error)
+    console.error("----------------------------------------")
+    console.error(process.env.INPUT_VERSIONS)
+    console.error("----------------------------------------")
+    throw new Error("Acceptable JSON format for versions is {\"version\":\"version1\" , \n  \"component\":\"component1\"}");
+  }
 }
 
 const inputProperties = process.env.INPUT_PROPERTIES;
@@ -285,7 +295,6 @@ if (inputProperties !== null && inputProperties !== "") {
     throw new Error("Acceptable JSON format for properties is {\"prop1\":\"value1\" , \n  \"prop2\":\"value2\" }");
   }
 }
-
 
 const hostname = process.env.INPUT_HOSTNAME;
 const username = process.env.INPUT_USERNAME;
@@ -308,7 +317,7 @@ __nccwpck_require__.e(/* import() */ 960).then(__nccwpck_require__.bind(__nccwpc
       "environment": environment,
       "onlyChanged": onlyChanged,
       "properties": properties,
-      "versions": versions
+      [useVersion ? "versions" : "snapshot"]: useVersion ? versions : snapshot
     };
 
     if (properties !== null) {
@@ -317,10 +326,7 @@ __nccwpck_require__.e(/* import() */ 960).then(__nccwpck_require__.bind(__nccwpc
 
     console.log("Triggering UCD deployment with " + data);
 
-
     const authHeader = 'Basic ' + Buffer.from(username + ':' + password).toString('base64');
-
-
     const httpsAgent = new https.Agent({
       rejectUnauthorized: disableSSLVerification === 'true'
     });
@@ -356,7 +362,6 @@ function triggerAPI() {
   __nccwpck_require__.e(/* import() */ 960).then(__nccwpck_require__.bind(__nccwpck_require__, 960))
     .then((module) => {
       console.log(" Will poll till completion of the UCD process with Request ID :- " + requestId);
-
       const fetch = module.default;
       const authHeader = 'Basic ' + Buffer.from(username + ':' + password).toString('base64');
       const apiUrl = 'https://' + hostname + ':' + port + '/cli/applicationProcessRequest/requestStatus?request=' + requestId
@@ -382,11 +387,12 @@ function triggerAPI() {
           if (result.result === 'SUCCEEDED') {
             console.log('Status is SUCCEEDED. Breaking the loop.');
             clearInterval(intervalId);
-          } else if (result.result === 'FAULTED' || result.result_v2 === 'FAULTED') {
-            console.error('Status is FAULTED or FAULTING. Breaking the loop and exiting with an error.');
+          } else if (['APPROVAL REJECTED','CANCELED','FAILED TO START','FAULTED'].includes(result.result)) {
+            console.error('Deployment failed: status = '+ result.result);
             clearInterval(intervalId);
             throw new Error('Deployment failed in UCD')
           }
+          
         })
         .catch(error => {
           console.error('Error when getting the deployment status of the request:', error);
