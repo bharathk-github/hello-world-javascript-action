@@ -19,9 +19,13 @@ inputs:
     description : 'Properties for Application process properties as a JSON String'
     required: false
     type: String
+  snapshot:
+    description: 'Name/ID of the snapshot. Mutually exclusive with versions parameter'
+    reqiuired: false
+    type: String
   versions:
-    description: 'Version along with component as a JSON string '
-    required: true
+    description: 'Version along with component as a JSON string eg:- {\"version\":\"version1\" , \n  \"component\":\"component1\"} '
+    required: false
     type: String
   hostname:
     description: 'UCD hostname'
