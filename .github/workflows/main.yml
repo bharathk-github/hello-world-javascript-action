@@ -6,7 +6,7 @@ on:
 #       - 'main'
 jobs:
   hello_world_job:
-    runs-on: self-hosted
+    runs-on: self-ubuntu
     environment: DEV
     name: A job to deploy UCD application
     steps:
