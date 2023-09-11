@@ -16,7 +16,8 @@ jobs:
         with:
           application: 'helloApplication'
           applicationProcess: 'app-process'
-          properties: 'Ene-Jen'
+          environment: 'Ene-Jen'
+          properties: ''
           snapshot: ''
           versions: '[{"version": "1", "component": "helloWorld"}]'
           hostname: 'localhost'
