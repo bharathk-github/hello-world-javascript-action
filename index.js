@@ -40,12 +40,22 @@ if (inputProperties !== null && inputProperties !== "") {
 const hostname = process.env.INPUT_HOSTNAME;
 const username = process.env.INPUT_USERNAME;
 const password = process.env.INPUT_PASSWORD;
+const authToken = process.env.INPUT_AUTHTOKEN;
 const onlyChanged = process.env.INPUT_ONLYCHANGED === 'true';
 const disableSSLVerification = process.env.INPUT_DISABLESSLVERIFICATION === 'true';
 const port = process.env.INPUT_PORT;
 let requestId = '';
 let intervalId;
 const https = require('https');
+
+let authHeader
+if(authToken !== ""){
+  authHeader = `Basic ${Buffer.from(`PasswordIsAuthToken:${authToken}`).toString('base64')}`
+} else if(password !== ""){
+  authHeader = `Basic ${Buffer.from(`${username}:${password}`).toString('base64')}`
+} else if (authToken == "" && password == "") {
+   throw new Error("Authentication unsuccessful!, Please provide either UCD password or UCD auth token ");
+}
 
 import('node-fetch')
   .then((module) => {
@@ -67,7 +77,6 @@ import('node-fetch')
 
     console.log("Triggering UCD deployment with " + data);
 
-    const authHeader = 'Basic ' + Buffer.from(username + ':' + password).toString('base64');
     const httpsAgent = new https.Agent({
       rejectUnauthorized: disableSSLVerification === 'true'
     });
@@ -104,7 +113,6 @@ function triggerAPI() {
     .then((module) => {
       console.log(" Will poll till completion of the UCD process with Request ID :- " + requestId);
       const fetch = module.default;
-      const authHeader = 'Basic ' + Buffer.from(username + ':' + password).toString('base64');
       const apiUrl = 'https://' + hostname + ':' + port + '/cli/applicationProcessRequest/requestStatus?request=' + requestId
       const httpsAgent = new https.Agent({
         rejectUnauthorized: disableSSLVerification === 'true'
@@ -117,7 +125,7 @@ function triggerAPI() {
       fetch(apiUrl, {
         method: 'GET',
         headers: {
-          'Authorization': `Basic ${Buffer.from(`${username}:${password}`).toString('base64')}`
+          'Authorization': authHeader
         },
         agent: httpsAgent
       })
