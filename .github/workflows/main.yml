@@ -22,6 +22,6 @@ jobs:
           versions: '[{"version": "1", "component": "helloWorld"}]'
           hostname: 'localhost'
           username: 'admin'
-          password: 'admin'
-          authToken: ''
+          password: ''
+          authToken: 'e4abe5d7-965c-4b46-b0a3-2592466b795e'
 
