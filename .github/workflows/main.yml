@@ -12,7 +12,7 @@ jobs:
     steps:
       - name: Deploy UCD application
         id: Deploy_MYAPP
-        uses: bharathk-github/UrbanCodeDeployAction@v1.22
+        uses: Amiya-873/hello-world-javascript-action@plugins-4169
         with:
           application: 'MYAPP'
           applicationProcess: 'Install'
