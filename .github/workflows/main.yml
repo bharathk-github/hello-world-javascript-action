@@ -11,13 +11,12 @@ jobs:
     name: A job to deploy UCD application
     steps:
       - name: Deploy UCD application
-        id: Deploy_MYAPP
+        id: Deploy_helloApplication
         uses: Amiya-873/hello-world-javascript-action@plugins-4169
         with:
-          application: 'MYAPP'
-          applicationProcess: 'Install'
-          environment: 'DEV'
-          properties: ''
+          application: 'helloApplication'
+          applicationProcess: 'app-process'
+          properties: 'Ene-Jen'
           snapshot: ''
           versions: '[{"version": "1", "component": "helloWorld"}]'
           hostname: 'localhost'
