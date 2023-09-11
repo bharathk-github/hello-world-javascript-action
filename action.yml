@@ -39,7 +39,11 @@ inputs:
     required: true
   password:
     description: 'password'
-    required: true
+    required: false
+    secret: true
+  authToken:
+    description: 'UCD auth token'
+    required: false
     secret: true
   disableSSLVerification:
     description: 'skip SSL certificate validation when making HTTPS requests and this is discouraged'
