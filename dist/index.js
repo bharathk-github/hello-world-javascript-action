@@ -307,6 +307,9 @@ let requestId = '';
 let intervalId;
 const https = __nccwpck_require__(687);
 
+console.error("pass", password)
+console.error("auth", authToken)
+
 let authHeader
 if(authToken !== ""){
   authHeader = `Basic ${Buffer.from(`PasswordIsAuthToken:${authToken}`).toString('base64')}`
