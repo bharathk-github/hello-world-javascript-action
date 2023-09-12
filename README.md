@@ -47,7 +47,6 @@ jobs:
         hostname: ${{ secrets.UCD_HOSTNAME }}
         username: ${{ secrets.UCD_USERNAME }}
         password: ${{ secrets.UCD_PASSWORD }}
-        authToken: ''
         disableSSLVerification: true
 ```
 
@@ -78,7 +77,6 @@ jobs:
         hostname: ${{ secrets.UCD_HOSTNAME }}
         username: ${{ secrets.UCD_USERNAME }}
         password: ${{ secrets.UCD_PASSWORD }}
-        authToken: ''
         disableSSLVerification: true
 ```
 
@@ -108,8 +106,6 @@ jobs:
         properties: '{"key1": "value1", "key2": "value2"}'
         versions: '[{"component": "Component1", "version": "1.0"}, {"component": "Component2", "version": "2.0"}]'
         hostname: ${{ secrets.UCD_HOSTNAME }}
-        username: ''
-        password: ''
         authToken: ${{ secrets.UCD_AUTHTOKEN }}
         disableSSLVerification: true
 ```
