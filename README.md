@@ -81,7 +81,7 @@ jobs:
 ```
 
 
-### Example:-3 Deploy using versions and authToken
+### Example:-3 Deploy versions using authToken to authenticate
 
 ```yaml
 name: Deploy to UCD
