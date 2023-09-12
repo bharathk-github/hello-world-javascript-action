@@ -12,7 +12,7 @@ jobs:
     steps:
       - name: Deploy UCD application
         id: Deploy_MYAPP
-        uses: bharathk-github/UrbanCodeDeployAction@v1.22
+        uses: bharathk-github/UrbanCodeDeployAction@v1.23
         with:
           application: 'MYAPP'
           applicationProcess: 'Install'
@@ -23,4 +23,5 @@ jobs:
           hostname: '${{ secrets.UCD_HOST }}'
           username: '${{ secrets.UCD_USERNAME }}'
           password: '${{ secrets.UCD_PASSWORD }}'
+          authToken: '${{ secrets.UCD_AUTHTOKEN }}'
 
