@@ -8,7 +8,7 @@ var versions;
 var useVersion;
 if (snapshot == null || snapshot == "") {
   try {
-    if(inputVersions == null || inputVersions == ""){
+    if (inputVersions == null || inputVersions == "") {
       console.error('No snapshot (or) Version provided in the input to be deployed ');
       throw new Error("Missing version (or) snapshot in the input");
     }
@@ -23,18 +23,41 @@ if (snapshot == null || snapshot == "") {
   }
 }
 
+const inputPropertiesFile = process.env.INPUT_PROPERTIESFILE;
 const inputProperties = process.env.INPUT_PROPERTIES;
 var properties = null;
-if (inputProperties !== null && inputProperties !== "") {
-  try {
-    properties = JSON.parse(inputProperties);
-  } catch (error) {
-    console.error('Error parsing input properties json ', error)
-    console.error("----------------------------------------")
-    console.error(inputProperties)
-    console.error("----------------------------------------")
-    throw new Error("Acceptable JSON format for properties is {\"prop1\":\"value1\" , \n  \"prop2\":\"value2\" }");
+if (inputPropertiesFile == null || inputPropertiesFile == "") {
+  if (inputProperties == null || inputProperties == "") {
+    console.log('No properties detected in this deployment request');
+  } else {
+    try {
+      properties = JSON.parse(inputProperties);
+    } catch (error) {
+      console.error('Error parsing input properties json ', error)
+      console.error("----------------------------------------")
+      console.error(inputProperties)
+      console.error("----------------------------------------")
+      throw new Error("Acceptable JSON format for properties is {\"prop1\":\"value1\" , \n  \"prop2\":\"value2\" }");
+    }
   }
+} else {
+  const fs = require('fs');
+  // Read the properties file
+  const propertiesFilePath = process.env.GITHUB_REPOSITORY + inputPropertiesFile;
+
+  console.log("Properties fie path recieved from user "+ inputPropertiesFile + "\n and we resolved it to "+ propertiesFilePath);
+  const propertiesFileContent = fs.readFileSync(propertiesFilePath, 'utf-8');
+  const props = {};
+  const lines = propertiesFileContent.split('\n');
+  for (const line of lines) {
+    const [key, value] = line.split('=');
+    if (key && value) {
+      props[key.trim()] = value.trim();
+    }
+  }
+  // Convert the properties object to a JSON string
+  properties = JSON.stringify(props, null, 2);
+
 }
 
 const hostname = process.env.INPUT_HOSTNAME;
@@ -49,12 +72,12 @@ let intervalId;
 const https = require('https');
 
 let authHeader
-if(authToken !== ""){
+if (authToken !== "") {
   authHeader = `Basic ${Buffer.from(`PasswordIsAuthToken:${authToken}`).toString('base64')}`
-} else if(password !== ""){
+} else if (password !== "") {
   authHeader = `Basic ${Buffer.from(`${username}:${password}`).toString('base64')}`
 } else if (authToken == "" && password == "") {
-   throw new Error("Authentication unsuccessful!, Please provide either UCD password or UCD auth token ");
+  throw new Error("Authentication unsuccessful!, Please provide either UCD password or UCD auth token ");
 }
 
 import('node-fetch')
@@ -136,12 +159,12 @@ function triggerAPI() {
           if (result.result === 'SUCCEEDED') {
             console.log('Status is SUCCEEDED. Breaking the loop.');
             clearInterval(intervalId);
-          } else if (['APPROVAL REJECTED','CANCELED','FAILED TO START','FAULTED'].includes(result.result)) {
-            console.error('Deployment failed: status = '+ result.result);
+          } else if (['APPROVAL REJECTED', 'CANCELED', 'FAILED TO START', 'FAULTED'].includes(result.result)) {
+            console.error('Deployment failed: status = ' + result.result);
             clearInterval(intervalId);
             throw new Error('Deployment failed in UCD')
           }
-          
+
         })
         .catch(error => {
           console.error('Error when getting the deployment status of the request:', error);
