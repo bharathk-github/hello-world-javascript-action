@@ -11,7 +11,7 @@ jobs:
     name: A job to deploy UCD application
     steps:
       - name: Fetch properties file
-        id: Fetch ucd properties file  
+        id: download_ucd_properties_file  
         uses: actions/checkout@v4
         with:
           sparse-checkout: |
