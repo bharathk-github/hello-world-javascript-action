@@ -374,10 +374,12 @@ __nccwpck_require__.e(/* import() */ 960).then(__nccwpck_require__.bind(__nccwpc
       "properties": properties,
       [useVersion ? "versions" : "snapshot"]: useVersion ? versions : snapshot
     };
-
+    
+    console.log("request data before properties  "+ data )
     if (properties !== null) {
       data.properties = properties;
     }
+
 
     console.log("Triggering UCD deployment with " + data);
 
