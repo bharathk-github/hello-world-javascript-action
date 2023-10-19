@@ -19,7 +19,7 @@ jobs:
           sparse-checkout-cone-mode: false
       - name: Deploy UCD application
         id: Deploy_MYAPP
-        uses: bharathk-github/UrbanCodeDeployAction@vtest-1.23
+        uses: bharathk-github/UrbanCodeDeployAction@vtest-1.24
         with:
           application: 'MYAPP'
           applicationProcess: 'Install'
