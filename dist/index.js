@@ -366,7 +366,7 @@ __nccwpck_require__.e(/* import() */ 960).then(__nccwpck_require__.bind(__nccwpc
     const fetch = module.default;
     const apiUrl = 'https://' + hostname + ':' + port + '/cli/applicationProcessRequest/request';
 
-    const data = {
+    var data = {
       "application": application,
       "applicationProcess": applicationProcess,
       "environment": environment,

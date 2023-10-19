@@ -99,7 +99,7 @@ import('node-fetch')
     const fetch = module.default;
     const apiUrl = 'https://' + hostname + ':' + port + '/cli/applicationProcessRequest/request';
 
-    const data = {
+    var data = {
       "application": application,
       "applicationProcess": applicationProcess,
       "environment": environment,
