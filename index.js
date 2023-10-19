@@ -43,9 +43,23 @@ if (inputPropertiesFile == null || inputPropertiesFile == "") {
 } else {
   const fs = require('fs');
   // Read the properties file
-  const propertiesFilePath = process.env.GITHUB_REPOSITORY + inputPropertiesFile;
+  const propertiesFilePath = process.env.GITHUB_WORKSPACE + inputPropertiesFile;
 
-  console.log("Properties fie path recieved from user "+ inputPropertiesFile + "\n and we resolved it to "+ propertiesFilePath);
+  console.log("Properties fie path recieved from user " + inputPropertiesFile + "\n and we resolved it to " + propertiesFilePath);
+  const filePath = 'path/to/your/file.txt'; // Replace with the path to your file
+
+  // Check if the file exists
+  fs.access(propertiesFilePath, fs.constants.F_OK, (err) => {
+    if (err) {
+      if (err.code === 'ENOENT') {
+        throw new Error('File does not exist!');
+      } else {
+        throw err; // Throw other errors
+      }
+    }
+    // console.log('File exists');
+  });
+
   const propertiesFileContent = fs.readFileSync(propertiesFilePath, 'utf-8');
   const props = {};
   const lines = propertiesFileContent.split('\n');
