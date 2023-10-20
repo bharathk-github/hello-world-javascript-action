@@ -46,7 +46,6 @@ if (inputPropertiesFile == null || inputPropertiesFile == "") {
   const propertiesFilePath = process.env.GITHUB_WORKSPACE + inputPropertiesFile;
 
   console.log("Properties fie path recieved from user " + inputPropertiesFile + "\n and we resolved it to " + propertiesFilePath);
-  const filePath = 'path/to/your/file.txt'; // Replace with the path to your file
 
   // Check if the file exists
   fs.access(propertiesFilePath, fs.constants.F_OK, (err) => {
@@ -54,10 +53,9 @@ if (inputPropertiesFile == null || inputPropertiesFile == "") {
       if (err.code === 'ENOENT') {
         throw new Error('File does not exist!');
       } else {
-        throw err; // Throw other errors
+        throw err; 
       }
     }
-    // console.log('File exists');
   });
 
   const propertiesFileContent = fs.readFileSync(propertiesFilePath, 'utf-8');
@@ -104,20 +102,20 @@ import('node-fetch')
       "applicationProcess": applicationProcess,
       "environment": environment,
       "onlyChanged": onlyChanged,
-      "properties": properties,
       [useVersion ? "versions" : "snapshot"]: useVersion ? versions : snapshot
     };
+    // var data = {"application":"MYAPP","applicationProcess":"Install","environment":"DEV","onlyChanged":false,"snapshot":"snapshot-1"};
     
-    console.log("request data before properties  "+ data )
     if (properties !== null) {
+      console.log("adding properties to the request body")
       data.properties = properties;
     }
 
 
-    console.log("Triggering UCD deployment with " + data);
+    console.log("Triggering UCD deployment with " + JSON.stringify(data));
 
     const httpsAgent = new https.Agent({
-      rejectUnauthorized: disableSSLVerification === 'true'
+      rejectUnauthorized: !disableSSLVerification 
     });
 
     fetch(apiUrl, {
@@ -154,7 +152,7 @@ function triggerAPI() {
       const fetch = module.default;
       const apiUrl = 'https://' + hostname + ':' + port + '/cli/applicationProcessRequest/requestStatus?request=' + requestId
       const httpsAgent = new https.Agent({
-        rejectUnauthorized: disableSSLVerification === 'true'
+        rejectUnauthorized: !disableSSLVerification
       });
 
       if (disableSSLVerification === 'true') {
