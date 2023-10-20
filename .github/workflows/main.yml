@@ -32,4 +32,5 @@ jobs:
           username: '${{ secrets.UCD_USERNAME }}'
           password: '${{ secrets.UCD_PASSWORD }}'
           authToken: '${{ secrets.UCD_AUTHTOKEN }}'
+          disableSSLVerification: 'true'
 
