@@ -371,7 +371,6 @@ __nccwpck_require__.e(/* import() */ 960).then(__nccwpck_require__.bind(__nccwpc
       "onlyChanged": onlyChanged,
       [useVersion ? "versions" : "snapshot"]: useVersion ? versions : snapshot
     };
-    // var data = {"application":"MYAPP","applicationProcess":"Install","environment":"DEV","onlyChanged":false,"snapshot":"snapshot-1"};
     
     if (properties !== null) {
       console.log("adding properties to the request body")
