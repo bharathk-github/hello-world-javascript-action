@@ -335,7 +335,7 @@ if (inputPropertiesFile == null || inputPropertiesFile == "") {
     }
   }
   // Convert the properties object to a JSON string
-  properties = JSON.stringify(props, null, 2);
+  properties = props
 
 }
 
