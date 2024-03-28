@@ -19,6 +19,10 @@ inputs:
     description : 'Properties for Application process properties as a JSON String'
     required: false
     type: String
+  propertiesfile:
+    description : 'Properties file path in the repository for Application process properties'
+    required: false
+    type: String
   snapshot:
     description: 'Name/ID of the snapshot. Mutually exclusive with versions parameter'
     reqiuired: false
