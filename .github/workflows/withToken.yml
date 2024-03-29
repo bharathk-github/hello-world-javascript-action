@@ -1,0 +1,24 @@
+on:
+  workflow_dispatch:
+jobs:
+  hello_world_job:
+    runs-on: self-hosted
+    environment: DEV
+    name: A job to deploy UCD application
+    steps:
+      - name: Deploy UCD application
+        id: Deploy_MYAPP
+        uses: bharathk-github/UrbanCodeDeployAction@v1.29
+        with:
+          application: 'MYAPP'
+          applicationProcess: 'DEPLOY-MYAPP'
+          environment: 'DEV'
+          properties: '{"prop1":"IBM", "prop2":"DEPLOY"}'
+          propertiesfile: 'ucdproperties'
+          snapshot: "snap1"
+          hostname: '${{ secrets.UCD_HOST }}'
+          port: '8443'
+          username: '${{ secrets.UCD_USERNAME }}'
+          password: '${{ secrets.UCD_PASSWORD }}'
+          authToken: '${{ secrets.UCD_AUTHTOKEN }}'
+          disableSSLVerification: 'true'

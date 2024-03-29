@@ -1,9 +1,5 @@
 on:
   workflow_dispatch:
-# on:
-#   push:
-#     branches:
-#       - 'main'
 jobs:
   hello_world_job:
     runs-on: self-hosted
@@ -19,18 +15,16 @@ jobs:
           sparse-checkout-cone-mode: false
       - name: Deploy UCD application
         id: Deploy_MYAPP
-        uses: bharathk-github/UrbanCodeDeployAction@v1.27
+        uses: bharathk-github/UrbanCodeDeployAction@v1.29
         with:
           application: 'MYAPP'
-          applicationProcess: 'Install'
+          applicationProcess: 'DEPLOY-MYAPP'
           environment: 'DEV'
-          # properties: '{"prop1":"${{ vars.PROP1 }}", "prop2":"${{ vars.PROP2 }}"}'
-          propertiesfile: '/ucdproperties'
-          snapshot: 'snapshot-2'
-          versions: '[{"version": "TEMP1-JCLA", "component": "MYCOMP"},{"version": "File1","component": "Regular component"},{"version": "file2","component": "Regular component"}]'
+          propertiesfile: 'ucdproperties'          
+          versions: '[{"version": "BUILD-DEV-JCL", "component": "MYCOMP"}]'
           hostname: '${{ secrets.UCD_HOST }}'
+          port: '8443'
           username: '${{ secrets.UCD_USERNAME }}'
           password: '${{ secrets.UCD_PASSWORD }}'
           authToken: '${{ secrets.UCD_AUTHTOKEN }}'
           disableSSLVerification: 'true'
-

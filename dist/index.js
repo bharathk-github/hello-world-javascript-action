@@ -279,22 +279,22 @@ if (snapshot == null || snapshot == "") {
       console.error('No snapshot (or) Version provided in the input to be deployed ');
       throw new Error("Missing version (or) snapshot in the input");
     }
-    versions = JSON.parse(inputVersions);
+    versions = JSON.parse(inputVersions)
     useVersion = true;
   } catch (error) {
     console.error('Error parsing input versions json ', error)
     console.error("----------------------------------------")
     console.error(process.env.INPUT_VERSIONS)
     console.error("----------------------------------------")
-    throw new Error("Acceptable JSON format for versions is {\"version\":\"version1\" , \n  \"component\":\"component1\"}");
+    throw new Error("Acceptable JSON format for versions is [{\"version\":\"version1\" , \n  \"component\":\"component1\"}]");
   }
 }
 
 const inputPropertiesFile = process.env.INPUT_PROPERTIESFILE;
 const inputProperties = process.env.INPUT_PROPERTIES;
 var properties = null;
-if (inputPropertiesFile == null || inputPropertiesFile == "") {
-  if (inputProperties == null || inputProperties == "") {
+if (inputPropertiesFile == undefined || inputPropertiesFile == "") {
+  if (inputProperties == undefined || inputProperties == "") {
     console.log('No properties detected in this deployment request');
   } else {
     try {
@@ -310,7 +310,7 @@ if (inputPropertiesFile == null || inputPropertiesFile == "") {
 } else {
   const fs = __nccwpck_require__(147);
   // Read the properties file
-  const propertiesFilePath = process.env.GITHUB_WORKSPACE + inputPropertiesFile;
+  const propertiesFilePath = process.env.GITHUB_WORKSPACE + "/"+inputPropertiesFile;
 
   console.log("Properties fie path recieved from user " + inputPropertiesFile + "\n and we resolved it to " + propertiesFilePath);
 
@@ -349,17 +349,21 @@ const port = process.env.INPUT_PORT;
 let requestId = '';
 let intervalId;
 const https = __nccwpck_require__(687);
-
+console.log("-----TEST VERSION ----")
 let authHeader
-if (authToken !== "") {
+if (authToken !== "" && authToken !== undefined) {
+  // console.log("authheader is passtoken because authToken value is :"+ authToken+"." )
   authHeader = `Basic ${Buffer.from(`PasswordIsAuthToken:${authToken}`).toString('base64')}`
-} else if (password !== "") {
+  console.log(authHeader)
+} else if (password !== "" && password !== undefined) {
+  console.log("auth header is userid/password")
   authHeader = `Basic ${Buffer.from(`${username}:${password}`).toString('base64')}`
-} else if (authToken == "" && password == "") {
+  console.log(authHeader)
+} else {
   throw new Error("Authentication unsuccessful!, Please provide either UCD password or UCD auth token ");
 }
 
-__nccwpck_require__.e(/* import() */ 960).then(__nccwpck_require__.bind(__nccwpck_require__, 960))
+__nccwpck_require__.e(/* import() */ 369).then(__nccwpck_require__.bind(__nccwpck_require__, 369))
   .then((module) => {
     const fetch = module.default;
     const apiUrl = 'https://' + hostname + ':' + port + '/cli/applicationProcessRequest/request';
@@ -378,7 +382,8 @@ __nccwpck_require__.e(/* import() */ 960).then(__nccwpck_require__.bind(__nccwpc
     }
 
 
-    console.log("Triggering UCD deployment with " + JSON.stringify(data));
+    const requestBody = JSON.stringify(data)
+    console.log("Requesting process with Data \n \t:" +requestBody)
 
     const httpsAgent = new https.Agent({
       rejectUnauthorized: !disableSSLVerification 
@@ -390,10 +395,9 @@ __nccwpck_require__.e(/* import() */ 960).then(__nccwpck_require__.bind(__nccwpc
         'Content-Type': 'application/json',
         'Authorization': authHeader // Include the basic authentication header
       },
-      body: JSON.stringify(data),
+      body: requestBody,
       agent: httpsAgent
-    })
-      .then(response => response.json())
+    }).then(response => response.json())
       .then(result => {
         console.log('API response:', result);
         requestId = result.requestId;
@@ -412,7 +416,7 @@ __nccwpck_require__.e(/* import() */ 960).then(__nccwpck_require__.bind(__nccwpc
 
 function triggerAPI() {
 
-  __nccwpck_require__.e(/* import() */ 960).then(__nccwpck_require__.bind(__nccwpck_require__, 960))
+  __nccwpck_require__.e(/* import() */ 369).then(__nccwpck_require__.bind(__nccwpck_require__, 369))
     .then((module) => {
       console.log(" Will poll till completion of the UCD process with Request ID :- " + requestId);
       const fetch = module.default;
