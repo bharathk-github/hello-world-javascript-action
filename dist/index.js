@@ -349,21 +349,17 @@ const port = process.env.INPUT_PORT;
 let requestId = '';
 let intervalId;
 const https = __nccwpck_require__(687);
-console.log("-----TEST VERSION ----")
 let authHeader
 if (authToken !== "" && authToken !== undefined) {
-  // console.log("authheader is passtoken because authToken value is :"+ authToken+"." )
   authHeader = `Basic ${Buffer.from(`PasswordIsAuthToken:${authToken}`).toString('base64')}`
-  console.log(authHeader)
 } else if (password !== "" && password !== undefined) {
   console.log("auth header is userid/password")
   authHeader = `Basic ${Buffer.from(`${username}:${password}`).toString('base64')}`
-  console.log(authHeader)
 } else {
   throw new Error("Authentication unsuccessful!, Please provide either UCD password or UCD auth token ");
 }
 
-__nccwpck_require__.e(/* import() */ 369).then(__nccwpck_require__.bind(__nccwpck_require__, 369))
+__nccwpck_require__.e(/* import() */ 54).then(__nccwpck_require__.bind(__nccwpck_require__, 54))
   .then((module) => {
     const fetch = module.default;
     const apiUrl = 'https://' + hostname + ':' + port + '/cli/applicationProcessRequest/request';
@@ -416,7 +412,7 @@ __nccwpck_require__.e(/* import() */ 369).then(__nccwpck_require__.bind(__nccwpc
 
 function triggerAPI() {
 
-  __nccwpck_require__.e(/* import() */ 369).then(__nccwpck_require__.bind(__nccwpck_require__, 369))
+  __nccwpck_require__.e(/* import() */ 54).then(__nccwpck_require__.bind(__nccwpck_require__, 54))
     .then((module) => {
       console.log(" Will poll till completion of the UCD process with Request ID :- " + requestId);
       const fetch = module.default;
