@@ -37,7 +37,7 @@ jobs:
 
     steps:
     - name: Deploy to UCD
-      uses: kblogin123456/hello-world-javascript-action@v1.23
+      uses: kblogin123456/hello-world-javascript-action@v1.32
       with:
         application: 'MyApp'
         applicationProcess: 'DeployProcess'
@@ -67,7 +67,7 @@ jobs:
 
     steps:
     - name: Deploy to UCD
-      uses: kblogin123456/hello-world-javascript-action@v1.23
+      uses: kblogin123456/hello-world-javascript-action@v1.32
       with:
         application: 'MyApp'
         applicationProcess: 'DeployProcess'
@@ -98,7 +98,7 @@ jobs:
 
     steps:
     - name: Deploy to UCD
-      uses: kblogin123456/hello-world-javascript-action@v1.23
+      uses: kblogin123456/hello-world-javascript-action@v1.32
       with:
         application: 'MyApp'
         applicationProcess: 'DeployProcess'
@@ -132,7 +132,7 @@ jobs:
           sparse-checkout-cone-mode: false
       - name: Deploy UCD application
         id: Deploy_MYAPP
-        uses: bharathk-github/UrbanCodeDeployAction@v1.29
+        uses: bharathk-github/UrbanCodeDeployAction@v1.32
         with:
           application: 'MYAPP'
           applicationProcess: 'DEPLOY-MYAPP'
@@ -161,13 +161,12 @@ jobs:
     steps:
       - name: Deploy UCD application
         id: Deploy_MYAPP
-        uses: bharathk-github/UrbanCodeDeployAction@v1.29
+        uses: bharathk-github/UrbanCodeDeployAction@v1.32
         with:
           application: 'MYAPP'
           applicationProcess: 'DEPLOY-MYAPP'
           environment: 'DEV'
           properties: '{"prop1":"${{ vars.PROP1 }}", "prop2":"${{ vars.PROP2 }}"}'
-          propertiesfile: 'ucdproperties'
           versions: '[{"version": "BUILD-DEV-JCL", "component": "MYCOMP"}]'
           hostname: '${{ secrets.UCD_HOST }}'
           port: '8443'
