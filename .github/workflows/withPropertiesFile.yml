@@ -15,7 +15,7 @@ jobs:
           sparse-checkout-cone-mode: false
       - name: Deploy UCD application
         id: Deploy_MYAPP
-        uses: bharathk-github/UrbanCodeDeployAction@v1.30
+        uses: bharathk-github/UrbanCodeDeployAction@v1.31
         with:
           application: 'MYAPP'
           applicationProcess: 'PARTIAL-JCL-DBRM'
