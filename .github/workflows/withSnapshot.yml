@@ -8,10 +8,10 @@ jobs:
     steps:
       - name: Deploy UCD application
         id: Deploy_MYAPP
-        uses: bharathk-github/UrbanCodeDeployAction@v1.29
+        uses: bharathk-github/UrbanCodeDeployAction@v1.30
         with:
           application: 'MYAPP'
-          applicationProcess: 'DEPLOY-MYAPP'
+          applicationProcess: 'PARTIAL-JCL-DBRM'
           environment: 'DEV'
           properties: '{"prop1":"IBM", "prop2":"DEPLOY"}'
           propertiesfile: 'ucdproperties'
