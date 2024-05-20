@@ -265,6 +265,11 @@ module.exports = require("worker_threads");
 var __webpack_exports__ = {};
 // This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
 (() => {
+/* ========================================================================== *
+ * Copyright (C) 2024 HCL America Inc.                                        *
+ * All rights reserved.                                                       *
+ * Licensed under Apache 2 License.                                           *
+ * ========================================================================== */
 const application = process.env.INPUT_APPLICATION;
 const applicationProcess = process.env.INPUT_APPLICATIONPROCESS;
 const environment = process.env.INPUT_ENVIRONMENT;

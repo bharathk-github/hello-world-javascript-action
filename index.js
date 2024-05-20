@@ -1,3 +1,8 @@
+/* ========================================================================== *
+ * Copyright (C) 2024 HCL America Inc.                                        *
+ * All rights reserved.                                                       *
+ * Licensed under Apache 2 License.                                           *
+ * ========================================================================== */
 const application = process.env.INPUT_APPLICATION;
 const applicationProcess = process.env.INPUT_APPLICATIONPROCESS;
 const environment = process.env.INPUT_ENVIRONMENT;
