@@ -8,7 +8,7 @@ jobs:
     steps:
       - name: Deploy UCD application
         id: Deploy_MYAPP
-        uses: HCL-TECH-SOFTWARE/devops-deploy-RequestApplicationProcess-action-@v1.33
+        uses: HCL-TECH-SOFTWARE/devops-deploy-RequestApplicationProcess-action@v1.33
         with:
           application: 'MYAPP'
           applicationProcess: 'PARTIAL-JCL-DBRM'
