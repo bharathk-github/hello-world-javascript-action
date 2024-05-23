@@ -1,4 +1,4 @@
-# GitHub Action: Deploy UCD Application
+# GitHub Action: Request Application process in Devops-Deploy
 
 This GitHub Action automates the process of triggering an UrbanCode Deploy (UCD) application process request based on the provided inputs. It streamlines the deployment workflow by integrating UCD directly into your GitHub repository.
 
@@ -24,7 +24,7 @@ This GitHub Action automates the process of triggering an UrbanCode Deploy (UCD)
 ### Example:-1 Deploy using versions
 
 ```yaml
-name: Deploy to UCD
+name: Deploy to Devops-Deploy
 
 on:
   push:
@@ -36,7 +36,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Deploy to UCD
+    - name: Deploy to Devops-Deploy
       uses: HCL-TECH-SOFTWARE/devops-deploy-RequestApplicationProcess-action@v1.33
       with:
         application: 'MyApp'
@@ -54,7 +54,7 @@ jobs:
 ### Example:-2 Deploy using snapshot
 
 ```yaml
-name: Deploy to UCD
+name: Deploy to Devops-Deploy
 
 on:
   push:
@@ -66,7 +66,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Deploy to UCD
+    - name: Deploy to Devops-Deploy
       uses: HCL-TECH-SOFTWARE/devops-deploy-RequestApplicationProcess-action@v1.33
       with:
         application: 'MyApp'
@@ -85,7 +85,7 @@ jobs:
 ### Example:-3 Deploy versions using authToken to authenticate
 
 ```yaml
-name: Deploy to UCD
+name: Deploy to Devops-deploy
 
 on:
   push:
@@ -97,7 +97,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Deploy to UCD
+    - name: Deploy to Devops-Deploy
       uses: HCL-TECH-SOFTWARE/devops-deploy-RequestApplicationProcess-action@v1.33
       with:
         application: 'MyApp'
