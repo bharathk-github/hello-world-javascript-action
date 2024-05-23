@@ -1,4 +1,4 @@
-# GitHub Action: Deploy UCD Application
+# GitHub Action: Request Application process in Devops-Deploy
 
 This GitHub Action automates the process of triggering an UrbanCode Deploy (UCD) application process request based on the provided inputs. It streamlines the deployment workflow by integrating UCD directly into your GitHub repository.
 
@@ -24,7 +24,7 @@ This GitHub Action automates the process of triggering an UrbanCode Deploy (UCD)
 ### Example:-1 Deploy using versions
 
 ```yaml
-name: Deploy to UCD
+name: Deploy to Devops-Deploy
 
 on:
   push:
@@ -36,8 +36,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Deploy to UCD
-      uses: kbharathk-github/hello-world-javascript-action@v1.33
+    - name: Deploy to Devops-Deploy
+      uses: HCL-TECH-SOFTWARE/devops-deploy-RequestApplicationProcess-action@v1.33
       with:
         application: 'MyApp'
         applicationProcess: 'DeployProcess'
@@ -54,7 +54,7 @@ jobs:
 ### Example:-2 Deploy using snapshot
 
 ```yaml
-name: Deploy to UCD
+name: Deploy to Devops-Deploy
 
 on:
   push:
@@ -66,8 +66,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Deploy to UCD
-      uses: bharathk-github/hello-world-javascript-action@v1.33
+    - name: Deploy to Devops-Deploy
+      uses: HCL-TECH-SOFTWARE/devops-deploy-RequestApplicationProcess-action@v1.33
       with:
         application: 'MyApp'
         applicationProcess: 'DeployProcess'
@@ -85,7 +85,7 @@ jobs:
 ### Example:-3 Deploy versions using authToken to authenticate
 
 ```yaml
-name: Deploy to UCD
+name: Deploy to Devops-deploy
 
 on:
   push:
@@ -97,8 +97,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Deploy to UCD
-      uses: bharathk-github/hello-world-javascript-action@v1.33
+    - name: Deploy to Devops-Deploy
+      uses: HCL-TECH-SOFTWARE/devops-deploy-RequestApplicationProcess-action@v1.33
       with:
         application: 'MyApp'
         applicationProcess: 'DeployProcess'
@@ -132,7 +132,7 @@ jobs:
           sparse-checkout-cone-mode: false
       - name: Deploy UCD application
         id: Deploy_MYAPP
-        uses: bharathk-github/UrbanCodeDeployAction@v1.33
+        uses: HCL-TECH-SOFTWARE/devops-deploy-RequestApplicationProcess-action@v1.33
         with:
           application: 'MYAPP'
           applicationProcess: 'DEPLOY-MYAPP'
@@ -161,7 +161,7 @@ jobs:
     steps:
       - name: Deploy UCD application
         id: Deploy_MYAPP
-        uses: bharathk-github/UrbanCodeDeployAction@v1.33
+        uses: HCL-TECH-SOFTWARE/devops-deploy-RequestApplicationProcess-action@v1.33
         with:
           application: 'MYAPP'
           applicationProcess: 'DEPLOY-MYAPP'
