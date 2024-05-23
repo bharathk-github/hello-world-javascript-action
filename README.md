@@ -37,7 +37,7 @@ jobs:
 
     steps:
     - name: Deploy to UCD
-      uses: HCL-TECH-SOFTWARE/devops-deploy-RequestApplicationProcess-action-@v1.33
+      uses: HCL-TECH-SOFTWARE/devops-deploy-RequestApplicationProcess-action@v1.33
       with:
         application: 'MyApp'
         applicationProcess: 'DeployProcess'
@@ -67,7 +67,7 @@ jobs:
 
     steps:
     - name: Deploy to UCD
-      uses: HCL-TECH-SOFTWARE/devops-deploy-RequestApplicationProcess-action-@v1.33
+      uses: HCL-TECH-SOFTWARE/devops-deploy-RequestApplicationProcess-action@v1.33
       with:
         application: 'MyApp'
         applicationProcess: 'DeployProcess'
@@ -98,7 +98,7 @@ jobs:
 
     steps:
     - name: Deploy to UCD
-      uses: HCL-TECH-SOFTWARE/devops-deploy-RequestApplicationProcess-action-@v1.33
+      uses: HCL-TECH-SOFTWARE/devops-deploy-RequestApplicationProcess-action@v1.33
       with:
         application: 'MyApp'
         applicationProcess: 'DeployProcess'
@@ -132,7 +132,7 @@ jobs:
           sparse-checkout-cone-mode: false
       - name: Deploy UCD application
         id: Deploy_MYAPP
-        uses: HCL-TECH-SOFTWARE/devops-deploy-RequestApplicationProcess-action-@v1.33
+        uses: HCL-TECH-SOFTWARE/devops-deploy-RequestApplicationProcess-action@v1.33
         with:
           application: 'MYAPP'
           applicationProcess: 'DEPLOY-MYAPP'
@@ -161,7 +161,7 @@ jobs:
     steps:
       - name: Deploy UCD application
         id: Deploy_MYAPP
-        uses: HCL-TECH-SOFTWARE/devops-deploy-RequestApplicationProcess-action-@v1.33
+        uses: HCL-TECH-SOFTWARE/devops-deploy-RequestApplicationProcess-action@v1.33
         with:
           application: 'MYAPP'
           applicationProcess: 'DEPLOY-MYAPP'
