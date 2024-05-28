@@ -1,26 +1,18 @@
 name: Create DevOps Deploy Component Version
-
 on:
-  push:
-    branches:
-      - master
-
+  workflow_dispatch:
 jobs:
   deploy:
-    runs-on: ubuntu-latest
-
+    runs-on: self-hosted
     steps:
-    - name: Set short_commit_id
-      id: vars
-      run: echo "short_commit_id=$(echo ${{ github.event.head_commit.id }} | cut -c1-7)" >> "$GITHUB_ENV"
     - name: Create Component Version
       uses: HCL-TECH-SOFTWARE/devops-deploy-createcomponentversion-action@v1.0
       with:
-        component: 'MyComp'
+        component: 'REGULAR-COMP'
         versionname: 'FromAction-1.0'
         description: 'Created from github action'
         username: '${{secrets.UCD_USERNAME}}'
         password: '${{secrets.UCD_PASSWORD}}'
-        link: '${{ github.server_url }}/${{ github.repository }}/commit/${{ github.event.head_commit.id }}'
+        link: 'https://github.com/bharathk-github/UrbanCodeDeployAction/blob/bharathk-github-patch-1/.github/workflows/withInlineDirectProperties.yml'
         hostname: '${{ secrets.UCD_HOST }}'
         port: '8443'
