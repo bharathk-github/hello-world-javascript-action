@@ -1,0 +1,18 @@
+name: Create DevOps Deploy Component Version
+on:
+  workflow_dispatch:
+jobs:
+  deploy:
+    runs-on: self-hosted
+    steps:
+    - name: Create Component Version
+      uses: HCL-TECH-SOFTWARE/devops-deploy-createcomponentversion-action@v1.0
+      with:
+        component: 'REGULAR-COMP'
+        versionname: 'FromAction-1.0'
+        description: 'Created from github action'
+        username: '${{secrets.UCD_USERNAME}}'
+        password: '${{secrets.UCD_PASSWORD}}'
+        link: 'https://github.com/bharathk-github/UrbanCodeDeployAction/blob/bharathk-github-patch-1/.github/workflows/withInlineDirectProperties.yml'
+        hostname: '${{ secrets.UCD_HOST }}'
+        port: '8443'
